@@ -1,54 +1,94 @@
 <?php
 
 class EP_Router{
+    private $router;
+
     private $urlSegment;
     private $nowController;
-    private $nowFunc;
+    private $nowFunction = 'index';     // Set default method
 
     public function __construct(){
+
+        // Check the router.php file
+        $filePath = APPPATH . 'Router.php';
+        if(file_exists($filePath)){
+            // Load the user's router
+            require($filePath);
+            $this->router = $router;
+        }else{
+            // TODO
+        }
+
         // URL Router
-        // Get the function
-        $this->urlSegment = @explode('/', $_SERVER['PATH_INFO']);
+        $this->urlSegment = @explode('/', trim($_SERVER['PATH_INFO'], '/'));
+        if(!$this->handle_router()){
+            // Turn to error router
+            // TODO
+        }
+    }
+
+    private function handle_router(){
         $length = count($this->urlSegment);
 
+        // Just one segment
+        if($length === 1){
+            // Check if in the router first
+            if(key_exists($this->urlSegment[0], $this->router)){
+                $routerValue = $this->router[$this->urlSegment[0]];
+                // Check the router value
 
-//        $nowController = @$this->urlSegment[2];
-//        $nowFunc = @$this->urlSegment[3];
-//
-//        if($nowController == null){
-//            //If it is /index.php
-//            $nowController = 'Main';
-//        }
-//
-//        // Check the router
-//        if(file_exists(COREPATH . 'controllers/' . $nowController . '.class.php')){
-//            // Load the controller
-//            require_once(COREPATH . 'controllers/' . $nowController . '.class.php');
-//            $controller = new $nowController;
-//
-//            // Check the function is defined
-//            if(in_array($nowFunc, get_class_methods($nowController))){
-//                $controller->$nowFunc();
-//            }else{
-//                // Default use the index function
-//                if(in_array('index', get_class_methods($nowController))){
-//                    return $controller->index();
-//                }
-//
-//                return EP_Callback::error('Bad router');
-//            }
-//
-//        }else{
-//            // Bad router
-//            return EP_Callback::error('Bad router');
-//        }
+                // Empty, error
+                if($routerValue === ''){
+                    return false;
+                }
+
+                $routerValue = explode('/', trim($routerValue, '/'));
+                $this->nowController = $routerValue[0];
+                if(isset($routerValue[1])){
+                    $this->nowFunction = $routerValue[1];
+                }else{
+                    $this->nowFunction = 'index';
+                }
+                return true;
+
+            }else{
+                // Not in the router table, treat like a single controller.
+                $this->nowFunction = $this->urlSegment[0];
+                $this->nowFunction = 'index';
+                return true;
+            }
+        }else{
+            // Check if in the router first
+            if(key_exists($this->urlSegment[0] . '/' . $this->urlSegment[1], $this->router)){
+                $routerValue = $this->router[$this->urlSegment[0] . '/' . $this->urlSegment[1]];
+
+                // Empty, error
+                if($routerValue === ''){
+                    return false;
+                }
+
+                $routerValue = explode('/', trim($routerValue, '/'));
+                $this->nowController = $routerValue[0];
+                if(isset($routerValue[1])){
+                    $this->nowFunction = $routerValue[1];
+                }else{
+                    $this->nowFunction = 'index';
+                }
+                return true;
+            }else{
+                // Not in the router table, treat like a single controller.
+                $this->nowFunction = $this->urlSegment[0];
+                $this->nowFunction = $this->urlSegment[1];
+                return true;
+            }
+        }
     }
 
-    public function GetController(){
-
+    public function get_controller(){
+        return $this->nowController;
     }
 
-    public function GetFunction(){
-
+    public function get_function(){
+        return $this->nowFunction;
     }
 }
