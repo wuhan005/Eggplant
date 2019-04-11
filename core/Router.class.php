@@ -53,7 +53,7 @@ class EP_Router{
 
             }else{
                 // Not in the router table, treat like a single controller.
-                $this->nowFunction = $this->urlSegment[0];
+                $this->nowController = $this->urlSegment[0];
                 $this->nowFunction = 'index';
                 return true;
             }
@@ -78,7 +78,7 @@ class EP_Router{
                 return true;
             }else{
                 // Not in the router table, treat like a single controller.
-                $this->nowFunction = $this->urlSegment[0];
+                $this->nowController = $this->urlSegment[0];
                 $this->nowFunction = $this->urlSegment[1];
                 return true;
             }
