@@ -19,24 +19,28 @@ class Eggplant{
     public function __construct(){
         $this->router = new EP_Router();
 
-        $nowController = $this->router->GetController();
-        $nowFunction = $this->router->GetFunction();
+        $nowController = $this->router->get_controller();
+        $nowFunction = $this->router->get_function();
 
         // Check the file
         if(file_exists(APPPATH . 'controllers/' . $nowController . '.php')){
             // Load the controller
-            require_once(COREPATH . 'controllers/' . $nowController . '.class.php');
-            $controller = new $nowController();
+            require_once(APPPATH . 'controllers/' . $nowController . '.php');
 
-            // Check the function is defined
-            if(in_array($nowFunction, get_class_methods($nowController))){
-                $controller->$nowFunction();
-            }else{
-                // Default use the index function
-                if(in_array('index', get_class_methods($nowController))){
-                    return $controller->index();
+            // Check the class is existed  or not
+            if(class_exists($nowController)){
+                $controller = new $nowController();
+
+                // Check the function is existed or not
+                if(method_exists($controller, $nowFunction)){
+                    return $controller->$nowFunction();
+                }else{
+                    // TODO
+                    echo('method not exist');
                 }
-                return EP_Callback::error('Bad router');
+            }else{
+                // TODO
+                echo('class not exist');
             }
 
         }else{

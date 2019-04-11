@@ -5,4 +5,4 @@
 $router[''] = 'Main';       // Default router
 
 
-// $router['Data/List']['GET'] = 'Main/GetData';
+//$router['Data/List'] = 'Main/indeax';

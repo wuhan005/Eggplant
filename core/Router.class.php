@@ -67,6 +67,7 @@ class EP_Router{
                     return false;
                 }
 
+                var_dump($routerValue);
                 $routerValue = explode('/', trim($routerValue, '/'));
                 $this->nowController = $routerValue[0];
                 if(isset($routerValue[1])){
