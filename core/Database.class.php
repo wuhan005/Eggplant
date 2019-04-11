@@ -48,7 +48,7 @@ class EP_Database {
     }
 
     public function query($sql, $data = []){
-        if($data === []){
+        if(empty($data)){
             $stmt = self::$db->query($sql);
         }else{
             $stmt = self::$db->prepare($sql);
@@ -60,11 +60,11 @@ class EP_Database {
 
     public function update($table, $data, $condition = []){
         // No condition, turn error.
-        if($condition === []){
+        if(empty($condition)){
             return false;
         }
 
-        $sql = "UPDATE `$table` SET ";
+        $sql = "UPDATE ? SET ";
 
         foreach($data as $field => $value){
             $sql .= "`$field` = ?";
@@ -87,13 +87,14 @@ class EP_Database {
         }
 
         $stmt = self::$db->prepare($sql);
-        $stmt->execute(array_merge(array_values($data), array_values($condition)));
+        $stmt->execute(array_merge([$table], array_values($data), array_values($condition)));
 
         return true;
     }
 
-    public function delete(){
-        //TODO
+    public function delete($table, $condition = []){
+        // TODO
+        //$sql = "DELETE FROM ? ";
     }
 
 

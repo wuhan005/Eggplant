@@ -67,8 +67,8 @@ class EP_Util_Input{
             $authorization = $_SERVER[strtoupper('HTTP_' . TOKEN_HEADER)] ?? '';
         }
 
-        $reg = str_replace('(:token)', '(.*)', TOKEN_FORMAT);
-        preg_match('/' . $reg .'/i', $authorization,  $token);
+        $reg = str_replace('(:token)', '/(.*)/i', TOKEN_FORMAT);
+        preg_match($reg, $authorization,  $token);
 
         if(count($token) === 2){
             return $token[1];

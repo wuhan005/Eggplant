@@ -4,7 +4,6 @@ define('APPPATH', dirname(dirname(__FILE__)) . '/app/');
 
 require_once(APPPATH . 'Config.php');               // App config
 
-require_once(COREPATH . 'Database.class.php');      // Database
 require_once(COREPATH . 'Controller.class.php');    // Controller
 require_once(COREPATH . 'Router.class.php');        // Router
 
