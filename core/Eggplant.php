@@ -8,6 +8,7 @@ require_once(COREPATH . 'Database.class.php');      // Database
 require_once(COREPATH . 'Controller.class.php');    // Controller
 require_once(COREPATH . 'Router.class.php');        // Router
 
+require_once(COREPATH . 'Corrector.class.php');     // Corrector
 require_once(COREPATH . 'Callback.class.php');      // Callback
 
 // Core of the Eggplant.
@@ -36,6 +37,7 @@ class Eggplant{
                     return $controller->$nowFunction();
                 }else{
                     // TODO
+
                     echo('method not exist');
                 }
             }else{

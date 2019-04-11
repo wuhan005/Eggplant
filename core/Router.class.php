@@ -16,7 +16,7 @@ class EP_Router{
             require($filePath);
             $this->router = $router;
         }else{
-            // TODO
+            Corrector::Show(101, ['app/Router.php']);
         }
 
         // URL Router
