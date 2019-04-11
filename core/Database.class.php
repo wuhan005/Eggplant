@@ -1,5 +1,5 @@
 <?php
-class Database {
+class EP_Database {
 
     private function __construct(){}
     private function __clone(){}

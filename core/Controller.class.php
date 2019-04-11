@@ -1,7 +1,6 @@
 <?php
-require_once(COREPATH . 'Database.class.php');      // Database
 
-class Controller{
+class EP_Controller{
     protected $db;
 
     public function __construct(){

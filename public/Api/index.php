@@ -11,5 +11,5 @@ header("Access-Control-Max-Age: 3600");
 define('BASEPATH', dirname(__FILE__));
 
 // Let's begin!!
-require_once '../../Eggplant.php';
+require_once '../../core/Eggplant.php';
 new Eggplant();
