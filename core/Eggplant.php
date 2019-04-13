@@ -2,6 +2,9 @@
 define('COREPATH', dirname(__FILE__) . '/');
 define('APPPATH', dirname(dirname(__FILE__)) . '/app/');
 
+define('EP_VERSION', '0.0.1');
+define('EP_FOOTER', 'Eggplant - A tiny PHP API framework.');
+
 require_once(APPPATH . 'Config.php');               // App config
 
 require_once(COREPATH . 'Controller.class.php');    // Controller

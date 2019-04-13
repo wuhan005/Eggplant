@@ -3,6 +3,7 @@
 
 // ===== App ===== //
 define('MODE', 'develop');        // product | develop
+define('ENTRANCE', '');
 
 // ===== Input ===== //
 define('TOKEN_HEADER', 'Authorization');
@@ -12,5 +13,5 @@ define('TOKEN_FORMAT', 'token (:token)');       // Default is `(:token)`
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
-define('DB_NAME', 'eggplant');
+define('DB_NAME', 'Vchat');
 
