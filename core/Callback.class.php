@@ -10,6 +10,7 @@ class EP_Callback{
            'data' => $data,
            'msg' => $msg
         )));
+        exit();
         return;
     }
 
@@ -18,6 +19,7 @@ class EP_Callback{
             'error' => $error,
             'msg' => $msg
         )));
+        exit();
         return;
     }
 

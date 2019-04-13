@@ -8,6 +8,7 @@ class EP_Controller{
 
     // uitls
     protected $input;
+    protected $back;
 
     public function __construct(){
         $this->db = EP_Database::_construct();
