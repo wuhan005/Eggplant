@@ -45,7 +45,7 @@ class EP_Util_Input{
         }
     }
 
-    public function json($name){
+    public function json(){
         $data = file_get_contents('php://input');
 
         try{

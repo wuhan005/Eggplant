@@ -20,7 +20,13 @@ class EP_Router{
         }
 
         // URL Router
-        $this->urlSegment = @explode('/', trim($_SERVER['PATH_INFO'], '/'));
+        // The PATH_INFO will be null if the url is /
+        if(isset($_SERVER['PATH_INFO'])){
+            $this->urlSegment = @explode('/', trim($_SERVER['PATH_INFO'], '/'));
+        }else{
+            $this->urlSegment = [''];
+        }
+
         if(!$this->handle_router()){
             // Turn to error router
             // TODO
@@ -35,13 +41,23 @@ class EP_Router{
             // Check if in the router first
             if(key_exists($this->urlSegment[0], $this->router)){
                 $routerValue = $this->router[$this->urlSegment[0]];
-                // Check the router value
 
+                // Check if set mothed
+                if(is_array($routerValue)){
+                    $requestMethod = $_SERVER['REQUEST_METHOD'];
+                    if(key_exists($requestMethod, $routerValue)){
+                        $routerValue = $routerValue[$requestMethod];
+                    }else{
+                        // Error HTTP request method in router
+                        return false;
+                    }
+                }
+
+                // Check the router value
                 // Empty, error
                 if($routerValue === ''){
                     return false;
                 }
-
                 $routerValue = explode('/', trim($routerValue, '/'));
                 $this->nowController = $routerValue[0];
                 if(isset($routerValue[1])){
@@ -62,12 +78,22 @@ class EP_Router{
             if(key_exists($this->urlSegment[0] . '/' . $this->urlSegment[1], $this->router)){
                 $routerValue = $this->router[$this->urlSegment[0] . '/' . $this->urlSegment[1]];
 
+                // Check if set mothed
+                if(is_array($routerValue)){
+                    $requestMethod = $_SERVER['REQUEST_METHOD'];
+                    if(key_exists($requestMethod, $routerValue)){
+                        $routerValue = $routerValue[$requestMethod];
+                    }else{
+                        // Error HTTP request method in router
+                        return false;
+                    }
+                }
+
                 // Empty, error
                 if($routerValue === ''){
                     return false;
                 }
 
-                var_dump($routerValue);
                 $routerValue = explode('/', trim($routerValue, '/'));
                 $this->nowController = $routerValue[0];
                 if(isset($routerValue[1])){
