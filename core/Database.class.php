@@ -10,11 +10,7 @@ class EP_Database {
     static public function _construct(){
         if(!self::$instance){
             self::$instance = new self();
-            try{
-                self::$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
-            }catch (Exception $e){
-                Corrector::Show(102);
-            }
+            self::$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
         }
 
         return self::$instance;

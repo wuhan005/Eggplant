@@ -20,7 +20,13 @@ class EP_Router{
         }
 
         // URL Router
-        $this->urlSegment = @explode('/', trim($_SERVER['PATH_INFO'], '/'));
+        // The PATH_INFO will be null if the url is /
+        if(isset($_SERVER['PATH_INFO'])){
+            $this->urlSegment = @explode('/', trim($_SERVER['PATH_INFO'], '/'));
+        }else{
+            $this->urlSegment = [''];
+        }
+
         if(!$this->handle_router()){
             // Turn to error router
             // TODO

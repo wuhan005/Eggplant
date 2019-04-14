@@ -1,5 +1,28 @@
 <?php
 
+set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
+    var_dump([$errNo, $errStr, $errFile, $errLine]);
+});
+
+set_exception_handler(function (Exception $e) {
+    header('Content-type: text/html;');
+    header("HTTP/1.1 500 Internal Server Error");
+
+//    var_dump($except);
+//    $errorData = array(
+//        'phpMsg' => $except['message']
+//    );
+//    var_dump($errorData);
+
+//    $errorMsg = vsprintf(self::$errorType[$errCode], $params);
+
+    var_dump($e->getMessage());
+    var_dump($e->getTrace());
+
+    require_once(COREPATH . '/templete/Error.php');
+    exit();
+});
+
 class Corrector{
     private function __construct(){}
     private function __clone(){}
@@ -10,14 +33,10 @@ class Corrector{
         102 => 'Database connect error. Please check the /app/Config.php.',
         999 => 'Unknown error.'
     );
-
-    static function Show($errCode = 999, $params = [], $tips = ''){
-        header('Content-type: text/html;');
-        header("HTTP/1.1 500 Internal Server Error");
-
-        $errorMsg = vsprintf(self::$errorType[$errCode], $params);
-
-        require_once(COREPATH . '/templete/Error.php');
-        exit();
-    }
 }
+
+//class ErrException extends Exception{
+//    public function phpMsg(){
+//        return $this->message;
+//    }
+//}

@@ -1,12 +1,13 @@
 <?php
 
 class Main extends EP_Controller {
+
     public function __construct(){
         parent::__construct();
     }
 
     public function index(){
-        EP_Callback::success(array(1,2,3), '成功');
+        EP_Callback::success('Hello Eggplant!', 'Success');
     }
 
     public function GetList(){
