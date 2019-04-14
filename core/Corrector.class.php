@@ -8,6 +8,16 @@ set_exception_handler(function (Exception $e) {
     header('Content-type: text/html;');
     header("HTTP/1.1 500 Internal Server Error");
 
+    // Get the code lines
+    $numCount = 5;
+    $lines = [];
+    if (null !== ($contents = file_get_contents($e->getFile()))) {
+        $lines = explode("\n", $contents);
+        $start  = $e->getLine() - $numCount;
+        $length = 2 * $numCount;
+        $lines = array_slice($lines, $start, $length, true);
+    }
+
 //    var_dump($except);
 //    $errorData = array(
 //        'phpMsg' => $except['message']
@@ -16,12 +26,21 @@ set_exception_handler(function (Exception $e) {
 
 //    $errorMsg = vsprintf(self::$errorType[$errCode], $params);
 
-    var_dump($e->getMessage());
-    var_dump($e->getTrace());
+//    var_dump($e->getMessage());
+//    var_dump($e->);
+
+    $errorData = array(
+        'msg' => $e->getMessage(),
+        'path' => $e->getFile(),
+        'line' => $e->getLine(),
+        'code' => $lines,
+        'trace' => $e->getTrace(),
+    );
 
     require_once(COREPATH . '/templete/Error.php');
     exit();
 });
+
 
 class Corrector{
     private function __construct(){}
