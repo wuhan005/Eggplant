@@ -93,5 +93,32 @@ class EP_Database {
         //$sql = "DELETE FROM ? ";
     }
 
+    public function isRepeat($table, $filed, $value){
+        // Check the parameter
+        if(is_array($value) && is_array($filed) && (count($filed) == count($value))){
+            $sql = "SELECT * FROM `$table` WHERE ";
+
+            $condition = [];
+            foreach($filed as $index => $f){
+                array_push($condition,"`$f` = ?");
+            }
+
+            $sql .= implode(' OR ', $condition);
+            $stmt = self::$db->prepare($sql);
+            $stmt->execute($value);
+            $res = $stmt->fetchAll();
+            return !empty($res);
+
+        }else if(is_string($value) && is_string($filed)){
+            $sql = "SELECT * FROM `$table` WHERE `$filed` = ?";
+            $stmt = self::$db->prepare($sql);
+            $stmt->execute([$value]);
+            $res = $stmt->fetchAll();
+            return !empty($res);
+        }else{
+            // TODO
+        }
+    }
+
 
 }
