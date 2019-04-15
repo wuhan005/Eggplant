@@ -42,8 +42,7 @@ class EP_Database {
         $sql .= ');';
 
         $stmt = self::$db->prepare($sql);
-        $stmt->execute(array_values($data));
-
+        return $stmt->execute(array_values($data));
     }
 
     public function query($sql, $data = []){
@@ -86,9 +85,7 @@ class EP_Database {
         }
 
         $stmt = self::$db->prepare($sql);
-        $stmt->execute(array_merge([$table], array_values($data), array_values($condition)));
-
-        return true;
+        return $stmt->execute(array_merge([$table], array_values($data), array_values($condition)));
     }
 
     public function delete($table, $condition = []){

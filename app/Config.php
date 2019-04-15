@@ -13,5 +13,5 @@ define('TOKEN_FORMAT', 'token (:token)');       // Default is `(:token)`
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
-define('DB_NAME', 'Vchat1');
+define('DB_NAME', 'eggplant');
 
