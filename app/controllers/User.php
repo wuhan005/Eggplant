@@ -23,7 +23,7 @@ class User extends EP_Controller{
             'Password' => $inputData['password']
         );
 
-        if($this->db->isRepeat('Users', 'UserName', $inputData['username'])){
+        if($this->db->isRepeat('Users', ['UserName'], $inputData['username'])){
             return EP_Callback::error('User name repeated');
         }
 

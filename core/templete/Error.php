@@ -128,7 +128,7 @@
         <span class="ep-subtitle">Run-Time Stack</span>
         <ul class="ep-list ep-list-bullet">
             <?php foreach($errorData['trace'] as $key => $value){?>
-                <li class="ep-path"><?php echo((count($errorData['trace']) - $key) . " {$value['file']} (#{$value['line']}) " . implode(', ', $value['args']));?></li>
+                <li class="ep-path"><?php echo((count($errorData['trace']) - $key) . " {$value['file']} (#{$value['line']}) " . EP_arrayToString($value['args']));?></li>
             <?php }?>
         </ul>
 

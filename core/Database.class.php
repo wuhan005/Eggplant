@@ -116,7 +116,7 @@ class EP_Database {
             $res = $stmt->fetchAll();
             return !empty($res);
         }else{
-            // TODO
+             throw new ParameterError(['$value', '$field']);
         }
     }
 
