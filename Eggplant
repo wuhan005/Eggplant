@@ -1,0 +1,6 @@
+<?php
+// CLI module of the Eggplant
+
+define('MODE', 'CLI');
+require_once('core/CLI/CLI.php');
+new CLI($argv, $argc);
