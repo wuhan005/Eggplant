@@ -1,6 +1,9 @@
 <?php
+namespace EP;
+
 define('COREPATH', dirname(__FILE__) . '/');
 define('APPPATH', dirname(dirname(__FILE__)) . '/app/');
+define('UTILSPATH', dirname(dirname(__FILE__)) . '/utils/');
 
 define('EP_VERSION', '0.0.1');
 define('EP_FOOTER', 'Eggplant - A tiny PHP API framework.');
@@ -20,7 +23,7 @@ class Eggplant{
     private $router;
 
     public function __construct(){
-        $this->router = new EP_Router();
+        $this->router = new Router();
 
         $nowController = $this->router->get_controller();
         $nowFunction = $this->router->get_function();

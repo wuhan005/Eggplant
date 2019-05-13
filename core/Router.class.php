@@ -1,6 +1,7 @@
 <?php
+namespace EP;
 
-class EP_Router{
+class Router{
     private $router;
 
     private $urlSegment;

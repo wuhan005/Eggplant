@@ -1,23 +1,24 @@
 <?php
+namespace EP\Utils;
 
 // Security part
-
-class EP_Util_Check{
+class Check{
     public function __construct(){
 
     }
 
-    public function check_key($element, array $source = []){
+    public function has_key($element, array $source = []){
+
         if(is_array($element)){
             foreach($element as $value){
-                if(!in_array($value, $source)){
+                if(!key_exists($value, $source)){
                     return false;
                 }
-                return true;
             }
+            return true;
         }else{
             // String, just one element
-            return in_array($element, $source);
+            return key_exists($element, $source);
         }
     }
 

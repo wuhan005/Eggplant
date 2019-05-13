@@ -1,16 +1,17 @@
 <?php
 
-class Main extends EP_Controller {
+class Main extends \EP\Controller {
 
     public function __construct(){
         parent::__construct();
     }
 
     public function index(){
-        EP_Callback::success('Hello Eggplant!', 'Success');
+        $name = $this->utils->Input->get('name');
+        \EP\Callback::success(sprintf('Hello %s!', $name), 'Success');
     }
 
     public function GetList(){
-        EP_Callback::success(array(2,3,3), '这是 GET 的数据');
+        \EP\Callback::success(array(2,3,3), '这是 GET 的数据');
     }
 }

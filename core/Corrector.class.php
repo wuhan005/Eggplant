@@ -1,10 +1,14 @@
 <?php
+namespace EP;
+
+use Exception;
 
 set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
     var_dump([$errNo, $errStr, $errFile, $errLine]);
+    exit();
 });
 
-set_exception_handler(function (Exception $e) {
+set_exception_handler(function ($e) {
     header('Content-type: text/html;');
     header("HTTP/1.1 500 Internal Server Error");
 
@@ -18,17 +22,6 @@ set_exception_handler(function (Exception $e) {
         $lines = array_slice($lines, $start, $length, true);
     }
 
-//    var_dump($except);
-//    $errorData = array(
-//        'phpMsg' => $except['message']
-//    );
-//    var_dump($errorData);
-
-//    $errorMsg = vsprintf(self::$errorType[$errCode], $params);
-
-//    var_dump($e->getMessage());
-//    var_dump($e->);
-
     $errorData = array(
         'msg' => $e->getMessage(),
         'path' => $e->getFile(),
@@ -41,6 +34,13 @@ set_exception_handler(function (Exception $e) {
     exit();
 });
 
+function arrayToString($array) {
+    if (is_array($array)){
+        return implode(', ', array_map('EP\arrayToString', $array));
+    }
+    return $array;
+}
+
 
 class Corrector{
     private function __construct(){}
@@ -52,6 +52,16 @@ class Corrector{
         102 => 'Database connect error. Please check the /app/Config.php.',
         999 => 'Unknown error.'
     );
+}
+
+class ParameterError extends Exception {
+    public function __construct($paramName = [], $code = 0, $previous = null){
+        if(is_array($paramName)){
+            parent::__construct('Parameter input error: ' . implode(', ', $paramName), $code, $previous);
+        }else{
+            parent::__construct($paramName, $code, $previous);
+        }
+    }
 }
 
 //class ErrException extends Exception{
