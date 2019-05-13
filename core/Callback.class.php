@@ -1,6 +1,7 @@
 <?php
+namespace EP;
 
-class EP_Callback{
+class Callback{
     private function __construct(){}
     private function __clone(){}
 

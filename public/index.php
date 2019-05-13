@@ -12,4 +12,5 @@ define('BASEPATH', dirname(__FILE__));
 
 // Let's begin!!
 require_once '../core/Eggplant.php';
-new Eggplant();
+
+new \EP\Eggplant();

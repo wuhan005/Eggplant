@@ -1,8 +1,8 @@
 <?php
-
+namespace EP\Utils;
 // Used to get the request input
 
-class EP_Util_Input{
+class Input{
     public function __construct(){
 
     }

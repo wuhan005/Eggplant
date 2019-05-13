@@ -1,8 +1,8 @@
 <?php
-
+namespace EP\Utils;
 // Security part
 
-class EP_Util_Check{
+class Check{
     public function __construct(){
 
     }

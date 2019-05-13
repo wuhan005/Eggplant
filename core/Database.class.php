@@ -1,5 +1,7 @@
 <?php
-class EP_Database {
+namespace EP;
+
+class Database {
 
     private function __construct(){}
     private function __clone(){}
@@ -10,7 +12,7 @@ class EP_Database {
     static public function _construct(){
         if(!self::$instance){
             self::$instance = new self();
-            self::$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+            self::$db = new \PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
         }
 
         return self::$instance;

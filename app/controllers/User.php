@@ -1,5 +1,4 @@
 <?php
-
 class User extends EP_Controller{
     public function __construct(){
         parent::__construct();

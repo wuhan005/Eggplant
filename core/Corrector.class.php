@@ -1,37 +1,40 @@
 <?php
+namespace EP;
 
-set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
-    var_dump([$errNo, $errStr, $errFile, $errLine]);
+use Exception;
+
+//set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
+//    var_dump([$errNo, $errStr, $errFile, $errLine]);
+////    exit();
+//});
+//
+//set_exception_handler(function (Exception $e) {
+//    header('Content-type: text/html;');
+//    header("HTTP/1.1 500 Internal Server Error");
+//
+//    // Get the code lines
+//    $numCount = 5;
+//    $lines = [];
+//    if (null !== ($contents = file_get_contents($e->getFile()))) {
+//        $lines = explode("\n", $contents);
+//        $start  = $e->getLine() - $numCount;
+//        $length = 2 * $numCount;
+//        $lines = array_slice($lines, $start, $length, true);
+//    }
+//
+//    $errorData = array(
+//        'msg' => $e->getMessage(),
+//        'path' => $e->getFile(),
+//        'line' => $e->getLine(),
+//        'code' => $lines,
+//        'trace' => $e->getTrace(),
+//    );
+//
+//    require_once(COREPATH . '/templete/Error.php');
 //    exit();
-});
+//});
 
-set_exception_handler(function (Exception $e) {
-    header('Content-type: text/html;');
-    header("HTTP/1.1 500 Internal Server Error");
-
-    // Get the code lines
-    $numCount = 5;
-    $lines = [];
-    if (null !== ($contents = file_get_contents($e->getFile()))) {
-        $lines = explode("\n", $contents);
-        $start  = $e->getLine() - $numCount;
-        $length = 2 * $numCount;
-        $lines = array_slice($lines, $start, $length, true);
-    }
-
-    $errorData = array(
-        'msg' => $e->getMessage(),
-        'path' => $e->getFile(),
-        'line' => $e->getLine(),
-        'code' => $lines,
-        'trace' => $e->getTrace(),
-    );
-
-    require_once(COREPATH . '/templete/Error.php');
-    exit();
-});
-
-function EP_arrayToString($array) {
+function arrayToString($array) {
     if (is_array($array)){
         return implode(', ', array_map('EP_arrayToString', $array));
     }
@@ -51,7 +54,7 @@ class Corrector{
     );
 }
 
-class ParameterError extends Exception {
+class ParameterError extends \Exception {
     public function __construct($paramName = [], $code = 0, Throwable $previous = null){
         if(is_array($paramName)){
             parent::__construct('Parameter input error: ' . implode(', ', $paramName), $code, $previous);
