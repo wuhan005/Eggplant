@@ -8,7 +8,7 @@ set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
     exit();
 });
 
-set_exception_handler(function (Exception $e) {
+set_exception_handler(function ($e) {
     header('Content-type: text/html;');
     header("HTTP/1.1 500 Internal Server Error");
 
@@ -36,7 +36,7 @@ set_exception_handler(function (Exception $e) {
 
 function arrayToString($array) {
     if (is_array($array)){
-        return implode(', ', array_map('EP_arrayToString', $array));
+        return implode(', ', array_map('EP\arrayToString', $array));
     }
     return $array;
 }
@@ -54,8 +54,8 @@ class Corrector{
     );
 }
 
-class ParameterError extends \Exception {
-    public function __construct($paramName = [], $code = 0, Throwable $previous = null){
+class ParameterError extends Exception {
+    public function __construct($paramName = [], $code = 0, $previous = null){
         if(is_array($paramName)){
             parent::__construct('Parameter input error: ' . implode(', ', $paramName), $code, $previous);
         }else{

@@ -16,8 +16,8 @@ class Controller{
     public function __construct(){
         $this->db = Database::_construct();
 
-        $this->input = new \EP\Utils\Input();
-        $this->check = new \EP\Utils\Check();
+        $this->input = new \EP\Utils\X\Input();
+        $this->check = new \EP\Utils\X\Check();
     }
 
 }

@@ -1,5 +1,5 @@
 <?php
-namespace EP\Utils;
+namespace EP\Utils\X;
 // Security part
 
 class Check{
