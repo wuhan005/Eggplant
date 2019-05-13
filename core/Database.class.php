@@ -16,6 +16,7 @@ class EP_Database {
         return self::$instance;
     }
 
+    // Insert data into table
     public function insert($table, $data){
         $sql = "INSERT INTO `$table` (";
         
@@ -45,6 +46,7 @@ class EP_Database {
         return $stmt->execute(array_values($data));
     }
 
+    // Execute the single SQL
     public function query($sql, $data = []){
         if(empty($data)){
             $stmt = self::$db->query($sql);
@@ -55,6 +57,11 @@ class EP_Database {
 
         return $stmt->fetchAll();
     }
+
+    // Select
+//    public function select($table, $field = []){
+//        if($field)
+//    }
 
     public function update($table, $data, $condition = []){
         // No condition, turn error.
