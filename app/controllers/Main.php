@@ -7,7 +7,8 @@ class Main extends \EP\Controller {
     }
 
     public function index(){
-        \EP\Callback::success('Hello Eggplant!', 'Success');
+        $name = $this->utils->Input->get('name');
+        \EP\Callback::success(sprintf('Hello %s!', $name), 'Success');
     }
 
     public function GetList(){

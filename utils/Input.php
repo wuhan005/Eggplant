@@ -1,5 +1,5 @@
 <?php
-namespace EP\Utils\X;
+namespace EP\Utils;
 // Used to get the request input
 
 class Input{

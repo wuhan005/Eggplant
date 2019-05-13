@@ -2,22 +2,17 @@
 namespace EP;
 
 require_once(COREPATH . 'Database.class.php');      // Database
-
-require_once(UTILSPATH . 'EP_Input.php');
-require_once(UTILSPATH . 'EP_Check.php');
+require_once(COREPATH . 'Utils.class.php');         // Utils
+require_once(APPPATH . 'Utils.php');                // Utils config
 
 class Controller{
     protected $db;
 
-    // uitls
-    protected $input;
-    protected $check;
+    protected $utils;
 
     public function __construct(){
         $this->db = Database::_construct();
-
-        $this->input = new \EP\Utils\X\Input();
-        $this->check = new \EP\Utils\X\Check();
+        $this->utils = new Utils();
     }
 
 }
