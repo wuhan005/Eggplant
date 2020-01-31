@@ -12,7 +12,6 @@ class Callback{
            'msg' => $msg
         )));
         exit();
-        return;
     }
 
     static public function error($msg = 'Error', $error = 500){
@@ -21,7 +20,6 @@ class Callback{
             'msg' => $msg
         )));
         exit();
-        return;
     }
 
 }

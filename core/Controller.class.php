@@ -15,4 +15,9 @@ class Controller{
         $this->utils = new Utils();
     }
 
+    // 尝试调用 utils
+    public function __get($name)
+    {
+        return $this->utils->{$name};
+    }
 }

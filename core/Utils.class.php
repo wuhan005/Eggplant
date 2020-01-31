@@ -23,7 +23,8 @@ class Utils{
             require(UTILSPATH . $fileName . '.php');
 
             $className = '\EP\Utils\\' . $fileName;
-            $this->utilsObject[$fileName] = new $className();
+            $this->utilsObject[$fileName] = new $className();       // 首字母大写 / 小写名称均可
+            $this->utilsObject[strtolower($fileName)] = new $className();
         }
     }
 

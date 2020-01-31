@@ -1,5 +1,9 @@
 <?php
-class User extends EP_Controller{
+
+use EP\Callback;
+use EP\Controller;
+
+class User extends Controller{
     public function __construct(){
         parent::__construct();
     }
@@ -9,11 +13,11 @@ class User extends EP_Controller{
         $inputData = $this->input->json();
 
         if($inputData === null){
-            EP_Callback::error('Payload error', 40300);
+            Callback::error('Payload error', 40300);
         }
 
         if(!$this->check->has_key(['username', 'password'], $inputData)){
-            EP_Callback::error('Missing param', 40301);
+            Callback::error('Missing param', 40301);
         }
 
         $data = array(
@@ -23,13 +27,14 @@ class User extends EP_Controller{
         );
 
         if($this->db->isRepeat('Users', ['UserName'], $inputData['username'])){
-            return EP_Callback::error('User name repeated');
+            Callback::error('User name repeated');
+            return;
         }
 
         if($this->db->insert('Users', $data)){
-            EP_Callback::success('', 'Success');
+            Callback::success('', 'Success');
         }else{
-            EP_Callback::error('Database error', '');
+            Callback::error('Database error', '');
         }
 
 
