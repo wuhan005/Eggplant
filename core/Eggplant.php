@@ -42,18 +42,14 @@ class Eggplant{
                 if(method_exists($controller, $nowFunction)){
                     return $controller->$nowFunction();
                 }else{
-                    // TODO
-
-                    echo('method not exist');
+                    return Callback::error(sprintf('Method "%s" not exist.', $nowFunction), 50000);
                 }
             }else{
-                // TODO
-                echo('class not exist');
+                return Callback::error(sprintf('Controller "%s" not exist.', $nowController), 50000);
             }
 
         }else{
-            // Bad router
-            return Callback::error('Bad router');
+            return Callback::error(sprintf('Controller file "%s.php" not exist.', $nowController), 50000);
         }
     }
 }

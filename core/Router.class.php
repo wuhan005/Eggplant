@@ -3,6 +3,7 @@ namespace EP;
 
 class Router{
     private $router;
+    private $router_404 = '';
 
     private $urlSegment;
     private $nowController;
@@ -16,6 +17,9 @@ class Router{
             // Load the user's router
             require($filePath);
             $this->router = $router;
+            if(isset($router404)){
+                $this->router_404 = $router404;
+            }
         }else{
             Corrector::Show(101, 'app/Router.php');
         }
@@ -29,8 +33,20 @@ class Router{
         }
 
         if(!$this->handle_router()){
-            // Turn to error router
-            // TODO
+            // 404
+            if($this->router_404 === ''){
+                // 默认 404
+                Callback::error("404 not found.", 40400);
+            }else{
+                // 自定义 404
+                $routerValue = explode('/', trim($this->router_404, '/'));
+                $this->nowController = $routerValue[0];
+                if(isset($routerValue[1])){
+                    $this->nowFunction = $routerValue[1];
+                }else{
+                    $this->nowFunction = 'index';
+                }
+            }
         }
     }
 

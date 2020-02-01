@@ -17,4 +17,8 @@ class Main extends Controller {
     public function GetList(){
         Callback::success(array(2,3,3), '这是 GET 的数据');
     }
+
+    public function NotFound(){
+        Callback::error("Oops! I can't find it!" ,40400);
+    }
 }
