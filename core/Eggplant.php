@@ -23,6 +23,7 @@ class Eggplant{
     private $router;
 
     public function __construct(){
+        ob_start();
         $this->router = new Router();
 
         $nowController = $this->router->get_controller();

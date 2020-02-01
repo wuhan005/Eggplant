@@ -48,9 +48,9 @@ class User extends Controller{
                 'code'     => ['安全码', ['uint', 'length: 4'], false],
             ),
         $inputData);
-
         if(!$is_validate){
             Callback::error($this->check->get_error_message(), 40000);
         }
+        Callback::success("111");
     }
 }
