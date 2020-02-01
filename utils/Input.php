@@ -52,7 +52,7 @@ class Input{
             $data = json_decode($data, true);
             return $data;
         } catch (Exception $e){
-            return null;
+            return json_decode('{}');
         }
     }
 

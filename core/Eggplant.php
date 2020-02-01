@@ -52,7 +52,7 @@ class Eggplant{
 
         }else{
             // Bad router
-            return EP_Callback::error('Bad router');
+            return Callback::error('Bad router');
         }
     }
 }

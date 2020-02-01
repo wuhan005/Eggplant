@@ -4,6 +4,7 @@ use EP\Callback;
 use EP\Controller;
 
 class User extends Controller{
+
     public function __construct(){
         parent::__construct();
     }
@@ -36,7 +37,20 @@ class User extends Controller{
         }else{
             Callback::error('Database error', '');
         }
+    }
 
+    public function Login(){
+        $inputData = $this->input->json();
 
+        $is_validate = $this->check->validate(
+            array(
+                'username' => ['用户名', ['string', 'maxlength: 10', 'minlength: 5'], true],
+                'password' => ['密码',   ['string', 'minlength: 10'], true],
+                'code'     => ['安全码', ['uint', 'length: 4'], true],
+            ),
+            $inputData);
+
+        var_dump($is_validate);
+        var_dump($this->check->get_error_message());
     }
 }

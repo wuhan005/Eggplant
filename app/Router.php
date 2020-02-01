@@ -6,3 +6,4 @@
 $router[''] = 'Main';       // Default router
 
 $router['User']['POST'] = 'User/Register';
+$router['User/Login']['POST'] = 'User/Login';
