@@ -4,7 +4,28 @@ namespace EP;
 use Exception;
 
 set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
-    var_dump([$errNo, $errStr, $errFile, $errLine]);
+    header('Content-type: text/html;');
+    header("HTTP/1.1 500 Internal Server Error");
+
+    // Get the code lines
+    $numCount = 5;
+    $lines = [];
+    if (null !== ($contents = file_get_contents($errFile))) {
+        $lines = explode("\n", $contents);
+        $start  = $errLine - $numCount;
+        $length = 2 * $numCount;
+        $lines = array_slice($lines, $start, $length, true);
+    }
+
+    $errorData = array(
+        'msg' =>$errStr,
+        'path' => $errFile,
+        'line' => $errLine,
+        'code' => $lines,
+        'trace' => array(),
+    );
+
+    require_once(COREPATH . '/templete/Error.php');
     exit();
 });
 

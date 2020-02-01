@@ -41,16 +41,16 @@ class User extends Controller{
 
     public function Login(){
         $inputData = $this->input->json();
-
         $is_validate = $this->check->validate(
             array(
                 'username' => ['用户名', ['string', 'maxlength: 10', 'minlength: 5'], true],
                 'password' => ['密码',   ['string', 'minlength: 10'], true],
-                'code'     => ['安全码', ['uint', 'length: 4'], true],
+                'code'     => ['安全码', ['uint', 'length: 4'], false],
             ),
-            $inputData);
+        $inputData);
 
-        var_dump($is_validate);
-        var_dump($this->check->get_error_message());
+        if(!$is_validate){
+            Callback::error($this->check->get_error_message(), 40000);
+        }
     }
 }

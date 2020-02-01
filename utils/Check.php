@@ -123,8 +123,8 @@ class Check{
                     }
                 }
             }
-            return true;
         }
+        return true;
     }
 
     public function get_error_message(){

@@ -13,7 +13,7 @@ require_once(APPPATH . 'Config.php');               // App config
 require_once(COREPATH . 'Controller.class.php');    // Controller
 require_once(COREPATH . 'Router.class.php');        // Router
 
-require_once(COREPATH . 'Corrector.class.php');     // Corrector
+require_once(COREPATH . 'Corrector.php');     // Corrector
 require_once(COREPATH . 'Callback.class.php');      // Callback
 
 // Core of the Eggplant.
